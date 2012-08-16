@@ -31,7 +31,7 @@
 -export([allowed_methods/2,
          create_path/2,
          from_json/2,
-         resource_exits/2,
+         resource_exists/2,
          to_json/2]).
 
 init(Config) ->
@@ -76,4 +76,5 @@ from_json(Req, #base_state{resource_state = #user_state{user_data = UserData, us
 to_json(Req, State) ->
   filler.
 
-
+malformed_request_message(Any, _Req, _State) ->
+    error({unexpected_malformed_request_message, Any}).
