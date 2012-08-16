@@ -15,7 +15,7 @@
 
 -spec add_to_solr(chef_type(), object_id(), object_id(), ejson_term()) -> ok.
 %% Add a Chef object to solr
-add_to_solr(TypeName, Id, OrgId, _Ejson) when TypeName =:= data_bag;
+add_to_solr(TypeName, _Id, _OrgId, _Ejson) when TypeName =:= data_bag;
                                               TypeName =:= user;
                                               TypeName =:= coookbook_version ->
             ok; %%These types are not indexed
@@ -26,7 +26,7 @@ add_to_solr(TypeName, Id, OrgId, Ejson) ->
 %% of calling chef_index_queue directly.
 -spec delete_from_solr(chef_indexable_object()
                         | #chef_cookbook_version{}
-                        | #chef_#data_bag_item{}
+                        | #chef_data_bag_item{}
                         | #chef_user{}) -> ok.
 delete_from_solr(Object) when is_record(Object, chef_cookbook_version);
                               is_record(Object, chef_data_bag_item);
